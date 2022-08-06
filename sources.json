@@ -4,8 +4,37 @@
     "sources": [
         {
             "name": "AnimeTosho",
-            "version": "2",
+            "version": 3,
             "baseUrl": "https://animetosho.org",
+            "rssParser": {
+                "rssUrl": "https://feed.animetosho.org",
+                "searchUrl": "/api?q={query}",
+                "items": "item",
+                "magnetHash": {
+                    "query": "infohash",
+                    "lookupAttribute": "name",
+                    "attribute": "value"
+                },
+                "magnetLink": {
+                    "query": "magnetUrl",
+                    "lookupAttribute": "name",
+                    "attribute": "value"
+                },
+                "title": {
+                    "query": "title"
+                },
+                "size": {
+                    "query": "size",
+                    "lookupAttribute": "name",
+                    "attribute": "value"
+                },
+                "sl": {                
+                    "seeders": "seeders",
+                    "leechers": "leechers",
+                    "lookupAttribute": "name",
+                    "attribute": "value"
+                }
+            },
             "htmlParser": {
                 "searchUrl": "/search?q={query}",
                 "rows": "#content .home_list_entry",
@@ -14,12 +43,10 @@
                     "attribute": "href"
                 },
                 "title": {
-                    "query": ".link",
-                    "attribute": "text"
+                    "query": ".link"
                 },
                 "size": {
-                    "query": ".size",
-                    "attribute": "text"
+                    "query": ".size"
                 },
                 "sl": {
                     "combined": ".links > span:nth-child(5)",
@@ -31,8 +58,32 @@
         },
         {
             "name": "Nyaa",
-            "version": "2",
+            "version": 3,
             "baseUrl": "https://nyaa.si",
+            "rssParser": {
+                "searchUrl": "/?page=rss&q={query}",
+                "items": "item",
+                "magnetHash": {
+                    "query": "nyaa:infoHash"
+                },
+                "title": {
+                    "query": "title"
+                },
+                "size": {
+                   "query": "nyaa:size"
+                },
+                "sl": {
+                    "seeders": "nyaa:seeders",
+                    "leechers": "nyaa:leechers"
+                },
+                "trackers": [
+                    "http://nyaa.tracker.wf:7777/announce",
+                    "udp://open.stealth.si:80/announce",
+                    "udp://tracker.opentrackr.org:1337/announce",
+                    "udp://exodus.desync.com:6969/announce",
+                    "udp://tracker.torrent.eu.org:451/announce"
+                ]
+            },
             "htmlParser": {
                 "searchUrl": "?q={query}",
                 "rows": ".torrent-list tbody tr",
@@ -41,23 +92,20 @@
                     "attribute": "href"
                 },
                 "title": {
-                    "query": "td:nth-child(2) > a:nth-last-child(1)",
-                    "attribute": "text"
+                    "query": "td:nth-child(2) > a:nth-last-child(1)"
                 },
                 "size": {
-                    "query": "td:nth-child(4)",
-                    "attribute": "text"
+                    "query": "td:nth-child(4)"
                 },
                 "sl": {
                     "seeders": "td:nth-child(6)",
-                    "leechers": "td:nth-child(7)",
-                    "attribute": "text"
+                    "leechers": "td:nth-child(7)"
                 }
             }
         },
         {
             "name": "1337x",
-            "version": "1",
+            "version": 1,
             "baseUrl": "https://1337x.to",
             "htmlParser": {
                 "searchUrl": "/search/{query}/1/",
@@ -68,18 +116,15 @@
                     "attribute": "href"
                 },
                 "title": {
-                    "query": ".name > a:nth-last-child(1)",
-                    "attribute": "text"
+                    "query": ".name > a:nth-last-child(1)"
                 },
                 "size": {
                    "query": ".size",
-                   "attribute": "text",
                    "regex": "(.*?B)"
                 },
                 "sl": {
                     "seeders": ".seeds",
-                    "leechers": ".leeches",
-                    "attribute": "text"
+                    "leechers": ".leeches"
                 }
             }
         }
