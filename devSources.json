@@ -16,7 +16,7 @@
                     "attribute": "value"
                 },
                 "magnetLink": {
-                    "query": "magnetUrl",
+                    "query": "magneturl",
                     "lookupAttribute": "name",
                     "attribute": "value"
                 },
