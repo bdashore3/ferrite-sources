@@ -1,0 +1,40 @@
+{
+    "name": "Jackett extensions",
+    "author": "kingbri",
+    "sources": [
+        {
+            "name": "Jackett - All",
+            "version": 1,
+            "dynamicBaseUrl": true,
+            "api": {
+                "usesSecret": true
+            },
+            "rssParser": {
+                "searchUrl": "/api/v2.0/indexers/all/results/torznab/api?apikey={apiKey}&t=search&q={query}",
+                "items": "item",
+                "magnetHash": {
+                    "query": "infohash",
+                    "lookupAttribute": "name",
+                    "attribute": "value"
+                },
+                "magnetLink": {
+                    "query": "magneturl",
+                    "lookupAttribute": "name",
+                    "attribute": "value"
+                },
+                "title": {
+                    "query": "title"
+                },
+                "size": {
+                    "query": "size"
+                },
+                "sl": {                
+                    "seeders": "seeders",
+                    "leechers": "peers",
+                    "lookupAttribute": "name",
+                    "attribute": "value"
+                }
+            }
+        }
+    ]
+}
