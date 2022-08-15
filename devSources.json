@@ -129,36 +129,26 @@
             }
         },
         {
-            "name": "Jackett",
+            "name": "RARBG",
             "version": 1,
-            "dynamicBaseUrl": true,
-            "api": {
-                "usesSecret": true
-            },
-            "rssParser": {
-                "searchUrl": "/api/v2.0/indexers/all/results/torznab/api?apikey={apiKey}&t=search&q={query}",
-                "items": "item",
-                "magnetHash": {
-                    "query": "infohash",
-                    "lookupAttribute": "name",
-                    "attribute": "value"
-                },
-                "magnetLink": {
-                    "query": "magneturl",
-                    "lookupAttribute": "name",
-                    "attribute": "value"
+            "baseUrl": "https://rarbg.to",
+            "htmlParser": {
+                "searchUrl": "/torrents.php?search={query}",
+                "rows": ".lista2t tbody .lista2",
+                "magnet": {
+                    "externalLinkQuery": "td:nth-child(2) > a",
+                    "query": "div.content-rounded table.lista-rounded tbody tr:nth-child(1) td.lista a:nth-child(3)",
+                    "attribute": "href"
                 },
                 "title": {
-                    "query": "title"
+                    "query": "td:nth-child(2) > a"
                 },
                 "size": {
-                    "query": "size"
+                   "query": "td:nth-child(4)"
                 },
-                "sl": {                
-                    "seeders": "seeders",
-                    "leechers": "peers",
-                    "lookupAttribute": "name",
-                    "attribute": "value"
+                "sl": {
+                    "seeders": "td:nth-child(5)",
+                    "leechers": "td:nth-child(6)"
                 }
             }
         }
