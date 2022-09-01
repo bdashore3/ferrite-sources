@@ -4,22 +4,24 @@
     "sources": [
         {
             "name": "Jackett - All",
-            "version": 1,
+            "version": 2,
             "dynamicBaseUrl": true,
             "api": {
-                "usesSecret": true
+                "clientSecret": {
+                    "dynamic": true
+                }
             },
             "rssParser": {
-                "searchUrl": "/api/v2.0/indexers/all/results/torznab/api?apikey={apiKey}&t=search&q={query}",
+                "searchUrl": "/api/v2.0/indexers/all/results/torznab/api?apikey={secret}&t=search&q={query}",
                 "items": "item",
                 "magnetHash": {
                     "query": "infohash",
-                    "lookupAttribute": "name",
+                    "discriminator": "name",
                     "attribute": "value"
                 },
                 "magnetLink": {
                     "query": "magneturl",
-                    "lookupAttribute": "name",
+                    "discriminator": "name",
                     "attribute": "value"
                 },
                 "title": {
@@ -31,10 +33,10 @@
                 "sl": {                
                     "seeders": "seeders",
                     "leechers": "peers",
-                    "lookupAttribute": "name",
+                    "discriminator": "name",
                     "attribute": "value"
                 }
             }
         }
     ]
-}
+  }

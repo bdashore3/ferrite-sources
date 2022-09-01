@@ -1,10 +1,11 @@
 {
-    "name": "kingbri's development extensions",
+    "name": "kingbri's developement extensions",
     "author": "kingbri",
     "sources": [
         {
             "name": "AnimeTosho",
-            "version": 3,
+            "version": 4,
+            "minVersion": "0.4",
             "baseUrl": "https://animetosho.org",
             "rssParser": {
                 "rssUrl": "https://feed.animetosho.org",
@@ -12,12 +13,12 @@
                 "items": "item",
                 "magnetHash": {
                     "query": "infohash",
-                    "lookupAttribute": "name",
+                    "discriminator": "name",
                     "attribute": "value"
                 },
                 "magnetLink": {
-                    "query": "magneturl",
-                    "lookupAttribute": "name",
+                    "query": "magnetUrl",
+                    "discriminator": "name",
                     "attribute": "value"
                 },
                 "title": {
@@ -25,13 +26,13 @@
                 },
                 "size": {
                     "query": "size",
-                    "lookupAttribute": "name",
+                    "discriminator": "name",
                     "attribute": "value"
                 },
                 "sl": {                
                     "seeders": "seeders",
                     "leechers": "leechers",
-                    "lookupAttribute": "name",
+                    "discriminator": "name",
                     "attribute": "value"
                 }
             },
@@ -58,8 +59,16 @@
         },
         {
             "name": "Nyaa",
-            "version": 3,
+            "version": 4,
+            "minVersion": "0.4",
             "baseUrl": "https://nyaa.si",
+            "trackers": [
+                "http://nyaa.tracker.wf:7777/announce",
+                "udp://open.stealth.si:80/announce",
+                "udp://tracker.opentrackr.org:1337/announce",
+                "udp://exodus.desync.com:6969/announce",
+                "udp://tracker.torrent.eu.org:451/announce"
+            ],
             "rssParser": {
                 "searchUrl": "/?page=rss&q={query}",
                 "items": "item",
@@ -75,14 +84,7 @@
                 "sl": {
                     "seeders": "nyaa:seeders",
                     "leechers": "nyaa:leechers"
-                },
-                "trackers": [
-                    "http://nyaa.tracker.wf:7777/announce",
-                    "udp://open.stealth.si:80/announce",
-                    "udp://tracker.opentrackr.org:1337/announce",
-                    "udp://exodus.desync.com:6969/announce",
-                    "udp://tracker.torrent.eu.org:451/announce"
-                ]
+                }
             },
             "htmlParser": {
                 "searchUrl": "?q={query}",
@@ -120,7 +122,7 @@
                 },
                 "size": {
                    "query": ".size",
-                   "regex": "(.*?B)"
+                   "regex": "(.+?B)"
                 },
                 "sl": {
                     "seeders": ".seeds",
@@ -130,8 +132,35 @@
         },
         {
             "name": "RARBG",
-            "version": 1,
+            "version": 2,
+            "minVersion": "0.4",
             "baseUrl": "https://rarbg.to",
+            "api": {
+                "apiUrl": "https://torrentapi.org/pubapi_v2.php",
+                "clientSecret": {
+                    "url": "?get_token=get_token&app_id=ferrite",
+                    "expiryLength": 660,
+                    "responseType": "json",
+                    "query": "token"
+                }
+            },
+            "jsonParser": {
+                "searchUrl": "?mode=search&search_string={query}&format=json_extended&app_id=ferrite&token={secret}",
+                "results": "torrent_results",
+                "magnetLink": {
+                    "query": "download"
+                },
+                "title": {
+                    "query": "title"
+                },
+                "size": {
+                    "query": "size"
+                },
+                "sl": {
+                    "seeders": "seeders",
+                    "leechers": "leechers"
+                }
+            },
             "htmlParser": {
                 "searchUrl": "/torrents.php?search={query}",
                 "rows": ".lista2t tbody .lista2",
@@ -149,6 +178,101 @@
                 "sl": {
                     "seeders": "td:nth-child(5)",
                     "leechers": "td:nth-child(6)"
+                }
+            }
+        },
+        {
+            "name": "YTS",
+            "version": 1,
+            "minVersion": "0.4",
+            "baseUrl": "https://yts.mx",
+            "trackers": [
+                "udp://tracker.opentrackr.org:1337/announce",
+                "udp://tracker.leechers-paradise.org:6969/announce",
+                "udp://9.rarbg.to:2710/announce",
+                "udp://p4p.arenabg.ch:1337/announce",
+                "udp://tracker.cyberia.is:6969/announce",
+                "http://p4p.arenabg.com:1337/announce",
+                "udp://tracker.internetwarriors.net:1337/announce"
+            ],
+            "jsonParser": {
+                "searchUrl": "/api/v2/list_movies.json?query_term={query}",
+                "results": "data.movies",
+                "subResults": "torrents",
+                "magnetHash": {
+                    "query": "hash"
+                },
+                "title": {
+                    "query": "title_long",
+                    "discriminator": "quality"
+                },
+                "size": {
+                    "query": "size"
+                },
+                "sl": {
+                    "seeders": "seeds",
+                    "leechers": "peers"
+                }
+            }
+        },
+        {
+            "name": "PirateBay",
+            "version": 1,
+            "minVersion": "0.4",
+            "baseUrl": "https://thepiratebay.org",
+            "fallbackUrls": [
+                "https://thepiratebay0.org/",
+                "https://thepiratebay10.org/"
+            ],
+            "trackers": [
+                "udp://tracker.coppersurfer.tk:6969/announce",
+                "udp://tracker.openbittorrent.com:6969/announce",
+                "udp://9.rarbg.to:2710/announce",
+                "udp://9.rarbg.me:2780/announce",
+                "udp://9.rarbg.to:2730/announce",
+                "udp://tracker.opentrackr.org:1337",
+                "http://p4p.arenabg.com:1337/announce",
+                "udp://tracker.torrent.eu.org:451/announce",
+                "udp://tracker.tiny-vps.com:6969/announce",
+                "udp://open.stealth.si:80/announce"
+            ],
+            "api": {
+                "apiUrl": "https://apibay.org"
+            },
+            "jsonParser": {
+                "searchUrl": "/q.php?q={query}",
+                "results": "torrent_results",
+                "magnetLink": {
+                    "query": "download"
+                },
+                "title": {
+                    "query": "title"
+                },
+                "size": {
+                    "query": "size"
+                },
+                "sl": {
+                    "seeders": "seeders",
+                    "leechers": "leechers"
+                }
+            },
+            "htmlParser": {
+                "searchUrl": "/search/{query}",
+                "rows": "table#searchResult tbody > tr",
+                "magnet": {
+                    "query": "td:nth-child(2) > a",
+                    "attribute": "href"
+                },
+                "title": {
+                    "query": "td:nth-child(2) .detName .detLink"
+                },
+                "size": {
+                   "query": "td:nth-child(2) .detDesc",
+                   "regex": "(Size.+?B)"
+                },
+                "sl": {
+                    "seeders": "td:nth-child(3)",
+                    "leechers": "td:nth-child(4)"
                 }
             }
         }
