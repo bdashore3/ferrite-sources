@@ -217,7 +217,7 @@
         },
         {
             "name": "PirateBay",
-            "version": 1,
+            "version": 2,
             "minVersion": "0.4",
             "baseUrl": "https://thepiratebay.org",
             "fallbackUrls": [
@@ -241,12 +241,11 @@
             },
             "jsonParser": {
                 "searchUrl": "/q.php?q={query}",
-                "results": "torrent_results",
-                "magnetLink": {
-                    "query": "download"
+                "magnetHash": {
+                    "query": "info_hash"
                 },
                 "title": {
-                    "query": "title"
+                    "query": "name"
                 },
                 "size": {
                     "query": "size"
