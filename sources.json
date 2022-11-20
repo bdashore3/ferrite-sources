@@ -274,6 +274,52 @@
                     "leechers": "td:nth-child(4)"
                 }
             }
+        },
+        {
+            "name": "BitSearch",
+            "version": 1,
+            "baseUrl": "https://bitsearch.to",
+            "htmlParser": {
+                "searchUrl": "/search?q={query}",
+                "rows": ".search-result:has(a.dl-torrent)",
+                "magnet": {
+                    "query": ".links > .dl-magnet",
+                    "attribute": "href"
+                },
+                "title": {
+                    "query": ".info > div > .title"
+                },
+                "size": {
+                   "query": ".info > div > div > div > div:nth-child(2)"
+                },
+                "sl": {
+                    "seeders": ".info > div > div > div > div:nth-child(3) > font",
+                    "leechers": ".info > div > div > div > div:nth-child(4) > font"
+                }
+            }
+        },
+        {
+            "name": "Torrentz2",
+            "version": 1,
+            "baseUrl": "https://torrentz2.nz",
+            "htmlParser": {
+                "searchUrl": "/search?q={query}",
+                "rows": "#wrap dl",
+                "magnet": {
+                    "query": "dd > span:nth-child(1) > a",
+                    "attribute": "href"
+                },
+                "title": {
+                    "query": "dt > a"
+                },
+                "size": {
+                   "query": "dd > span:nth-child(3)"
+                },
+                "sl": {
+                    "seeders": "dd > span:nth-child(4)",
+                    "leechers": "dd > span:nth-child(5)"
+                }
+            }
         }
     ]
 }
