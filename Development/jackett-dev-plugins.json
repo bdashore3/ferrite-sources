@@ -1,11 +1,16 @@
 {
-  "name": "Jackett extensions",
+  "name": "Jackett development plugins",
   "author": "kingbri",
   "sources": [
     {
-      "name": "Jackett - All",
-      "version": 2,
+      "name": "Jackett",
+      "version": 3,
       "dynamicBaseUrl": true,
+      "tags": [
+        {
+          "name": "Self Hosted"
+        }
+      ],
       "api": {
         "clientSecret": {
           "dynamic": true
