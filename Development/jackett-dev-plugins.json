@@ -29,6 +29,9 @@
           "discriminator": "name",
           "attribute": "value"
         },
+        "subName": {
+          "query": "jackettindexer"
+        },
         "title": {
           "query": "title"
         },
