@@ -409,27 +409,48 @@
   "actions": [
     {
       "name": "Open in Outplayer",
-      "version": 1,
+      "version": 2,
+      "minVersion": "0.6.2",
       "requires": [
         "debrid"
       ],
-      "deeplink": "outplayer://{link}"
+      "deeplink": [
+        {
+          "os": "iOS",
+          "scheme": "outplayer://{link}"
+        }
+      ]
     },
     {
       "name": "Open in VLC",
-      "version": 1,
+      "version": 2,
+      "minVersion": "0.6.2",
       "requires": [
         "debrid"
       ],
-      "deeplink": "vlc://{link}"
+      "deeplink": [
+        {
+          "os": "iOS",
+          "scheme": "vlc-x-callback://x-callback-url/stream?url=${link}"
+        },
+        {
+          "scheme": "vlc://${link}"
+        }
+      ]
     },
     {
       "name": "Open in Infuse",
-      "version": 1,
+      "version": 2,
+      "minVersion": "0.6.2",
       "requires": [
         "debrid"
       ],
-      "deeplink": "infuse://x-callback-url/play?url={link}"
+      "deeplink": [
+        {
+          "os": "iOS",
+          "scheme": "infuse://x-callback-url/play?url={link}"
+        }
+      ]
     },
     {
       "name": "Open in WebTor",
@@ -441,11 +462,17 @@
     },
     {
       "name": "Open in iTorrent",
-      "version": 1,
+      "version": 2,
+      "minVersion": "0.6.2",
       "requires": [
         "magnet"
       ],
-      "deeplink": "{link}"
+      "deeplink": [
+        {
+          "os": "iOS",
+          "scheme": "{link}"
+        }
+      ]
     }
   ]
 }
