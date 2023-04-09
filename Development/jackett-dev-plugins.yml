@@ -1,0 +1,38 @@
+name: Jackett YAML development plugins
+author: kingbri
+# TODO: Bump minVersion to 0.7 once app version is bumped in app
+sources:
+  - name: Jackett
+    version: 4
+    minVersion: '0.6.4'
+    about: >-
+      A self hosted indexer for searching media
+    dynamicWebsite: true
+    tags:
+      - name: Self Hosted
+    api:
+      clientSecret:
+        dynamic: true
+    rssParser:
+      searchUrl: >-
+        /api/v2.0/indexers/all/results/torznab/api?apikey={secret}&t=search&q={query}
+      items: item
+      magnetHash:
+        query: infohash
+        discriminator: name
+        attribute: value
+      magnetLink:
+        query: magneturl
+        discriminator: name
+        attribute: value
+      subName:
+        query: jackettindexer
+      title:
+        query: title
+      size:
+        query: size
+      sl:
+        seeders: seeders
+        leechers: peers
+        discriminator: name
+        attribute: value
