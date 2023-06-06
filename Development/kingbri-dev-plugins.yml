@@ -309,6 +309,59 @@ sources:
       title:
         query: td:nth-child(1)
         regex: '{query}'
+  - name: EZTV
+    version: 1
+    minVersion: '0.7'
+    about: >-
+      Large source of western TV shows.
+    website: "https://eztv.re"
+    tags:
+      - name: TV
+    fallbackUrls:
+      - "https://eztv.ag"
+      - "https://eztv.it"
+      - "https://eztv.ch"
+    htmlParser:
+      searchUrl: /search/{query}
+      rows: table:nth-child(16) tbody .forum_header_border
+      magnet:
+        query: td:nth-child(3) a
+        attribute: href
+      title:
+        query: td:nth-child(2) a
+      size:
+        query: td:nth-child(4)
+      sl:
+        seeders: td:nth-child(6)
+  - name: RuTor
+    version: 1
+    minVersion: '0.7'
+    about: >-
+      Large library of media. Source is partly in Russian.
+    website: "http://rutor.info"
+    tags:
+      - name: Russian
+        color: 32ade6
+      - name: Not Secure
+        color: ff3b30
+      - name: Movies
+      - name: TV
+      - name: Anime
+    htmlParser:
+      searchUrl: /search/{query}
+      rows: '#index tbody tr:not(.backgr)'
+      magnet:
+        query: td:nth-child(2) a:nth-child(2)
+        attribute: href
+      title:
+        query: td:nth-child(2) a:nth-child(3)
+      size:
+        query: td:nth-last-child(2)
+      sl:
+        seeders: td:nth-last-child(1) span.green
+        seederRegex: ([^\x{A0}])
+        leechers: td:nth-last-child(1) span.red
+        leecherRegex: ([^\x{A0}])
 actions:
   - name: Open in Outplayer
     version: 3
