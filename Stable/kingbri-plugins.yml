@@ -113,55 +113,6 @@ sources:
       sl:
         seeders: .seeds
         leechers: .leeches
-  - name: RARBG
-    version: 4
-    minVersion: '0.7'
-    about: >-
-      Massive aggregate site for media.
-      Can be unreliable at times, so a different source is probably better.
-    website: https://rarbg.to
-    tags:
-      - name: Unreliable
-        color: ff3b30
-      - name: Movies
-      - name: TV
-      - name: Anime
-    api:
-      apiUrl: https://torrentapi.org/pubapi_v2.php
-      clientSecret:
-        url: ?get_token=get_token&app_id=ferrite
-        expiryLength: 660
-        responseType: json
-        query: token
-    jsonParser:
-      searchUrl: >-
-        ?mode=search&search_string={query}&format=json_extended&app_id=ferrite&token={secret}
-      results: torrent_results
-      magnetLink:
-        query: download
-      title:
-        query: title
-      size:
-        query: size
-      sl:
-        seeders: seeders
-        leechers: leechers
-    htmlParser:
-      searchUrl: /torrents.php?search={query}
-      rows: .lista2t tbody .lista2
-      magnet:
-        externalLinkQuery: td:nth-child(2) > a
-        query: >-
-          div.content-rounded table.lista-rounded tbody tr:nth-child(1) td.lista
-          a:nth-child(3)
-        attribute: href
-      title:
-        query: td:nth-child(2) > a
-      size:
-        query: td:nth-child(4)
-      sl:
-        seeders: td:nth-child(5)
-        leechers: td:nth-child(6)
   - name: YTS
     version: 3
     minVersion: '0.7'
